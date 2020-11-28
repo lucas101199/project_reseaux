@@ -8,6 +8,9 @@ NetworkManager:
     - enable: False
     
 ## Suppression de la passerelle par défaut
+ip route del default:
+  cmd:
+    - run
 
 ## Configuration de VM2
 eth1:
@@ -61,7 +64,5 @@ radvd:
     - group: root
     - mode: 644
     
-ip route del default:
-  cmd:
-    - run
+
 
