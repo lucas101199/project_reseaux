@@ -6,7 +6,7 @@ NetworkManager:
   service:
     - dead
     - enable: False
-    
+
 ## Suppression de la passerelle par défaut
 ip route del default:
   cmd:
@@ -38,7 +38,7 @@ eth2:
     - ipv6netmask: 64
 
 ## Configuration de la route vers LAN2 via VM2
-routes:
+routes_eth1:
   network.routes:
     - name: eth1
     - routes:
@@ -71,3 +71,19 @@ radvd:
     - user: root
     - group: root
     - mode: 644
+
+inetutils-inetd:
+  pkg:
+    - installed
+
+update-inetd --add "echo stream tcp6 nowait nobody internal":
+  cmd:
+    - run
+
+service inetutils-inetd start:
+  cmd:
+    - run
+
+service inetutils-inetd restart:
+  cmd:
+    - run

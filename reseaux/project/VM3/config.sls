@@ -26,7 +26,7 @@ eth2:
     - enabled: True
     - type: eth
     - proto: none
-    - enable_ipv4: false
+    - enable_ipv4: True
     - ipv6proto: static
     - enable_ipv6: true
     - ipv6_autoconf: no
@@ -34,13 +34,15 @@ eth2:
     - ipv6netmask: 64
 
 ## Configuration de la route vers LAN1 via VM2
-routes:
+routes_eth1:
   network.routes:
     - name: eth1
     - routes:
       - name: LAN1
         ipaddr: 172.16.2.128/28
         gateway: 172.16.2.162
+routes_eth2:
+  network.routes:
     - name: eth2
     - routes:
       - name: LAN2-6
@@ -52,3 +54,19 @@ routes:
       - name: LAN3-6
         ipaddr: fc00:1234:3::/64
         gateway: fc00:1234:4::36
+
+inetutils-inetd:
+  pkg:
+    - installed
+
+update-inetd --add "echo stream tcp6 nowait nobody internal":
+  cmd:
+    - run
+
+service inetutils-inetd start:
+  cmd:
+    - run
+
+service inetutils-inetd restart:
+  cmd:
+    - run

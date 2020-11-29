@@ -38,7 +38,7 @@ eth2:
     - ipv6netmask: 64
 
 ## Configuration de la route vers LAN2 via VM2
-routes:
+routes_eth1:
   network.routes:
     - name: eth1
     - routes:
@@ -49,6 +49,8 @@ routes:
         ipaddr: fc00:1234:4::/64
         gateway: fc00:1234:1::26
 
+
+## But enable ipv6 forwarding
 net.ipv6.conf.all.forwarding:
   sysctl:
     - present
@@ -57,7 +59,7 @@ net.ipv6.conf.all.forwarding:
 dhclient eth0:
   cmd:
     - run
-    
+
 radvd:
   pkg:
     - installed
