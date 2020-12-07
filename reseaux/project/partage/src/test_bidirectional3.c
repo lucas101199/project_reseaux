@@ -18,7 +18,7 @@ int main (int argc, char **argv){
     char cmd[100];
 
     int fdTun = tun_alloc(idTun);
-
+    printf("%d", fdTun);
     strcpy(cmd, "./configure-tun.sh");
     strcat(cmd, " ");
     strcat(cmd, argv[1]);

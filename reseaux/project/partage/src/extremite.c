@@ -27,7 +27,7 @@ int ext_out(char * port, int fd){
     int len,on; /* utilitaires divers */
     struct addrinfo * resol; /* résolution */
     struct addrinfo indic = {AI_PASSIVE, /* Toute interface */
-                             PF_INET6,SOCK_STREAM,0, /* IP mode connecté */
+                             PF_INET,SOCK_STREAM,0, /* IP mode connecté */
                              0,NULL,NULL,NULL};
     struct sockaddr_in client; /* adresse de socket du client */
     int err; /* code d'erreur */
@@ -55,7 +55,7 @@ int ext_out(char * port, int fd){
     fprintf(stderr,"Option(s) OK!\n");
 
     /* Association de la socket s à l'adresse obtenue par résolution */
-    if (bind(s,resol->ai_addr,sizeof(struct sockaddr_in6))<0) {
+    if (bind(s,resol->ai_addr,sizeof(struct sockaddr_in))<0) {
         perror("bind");
         exit(5);
     }

@@ -3,7 +3,7 @@ CCFLAGS = -W -Wall -g
 
 OBJ = iftun.o extremite.o
 
-all : test_iftun ext_in ext_out test_bidirectional test_bidirectional3
+all : test_iftun ext_in ext_out test_bidirectional test_bidirectional3 tunnel64d test
 
 test_iftun: test_iftun.c iftun.o extremite.o
 		$(CC) $(CCFLAGS) test_iftun.c -o test_iftun iftun.o extremite.o
@@ -20,6 +20,12 @@ ext_in: ext_in.c $(OBJ)
 ext_out: ext_out.c $(OBJ)
 		$(CC) $(CCFLAGS) ext_out.c -o ext_out $(OBJ)
 
+tunnel64d: tunnel64d.c $(OBJ)
+		$(CC) $(CCFLAGS) tunnel64d.c -o tunnel64d $(OBJ)
+
+test: test.c
+		$(CC) $(CCFLAGS) test.c -o test
+
 iftun.o : iftun.c
 		$(CC) $(CCFLAGS) -c iftun.c
 
@@ -32,3 +38,5 @@ clean:
 		- rm ext_out
 		- rm test_bidirectional
 		- rm test_bidirectional3
+		- rm tunnel64d
+		- rm test
